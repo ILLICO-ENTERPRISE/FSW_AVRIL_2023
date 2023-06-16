@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- On peut aussi charger du JavaScript -->
+  <link href="index.css" rel="stylesheet" type="text/css">
+  <title>Functions</title>
+</head>
+
+<body>
+  <!-- SELECTEUR (ID/CLASS/ATTRS/TAG) -->
+  <!-- DEUX TYPES DE TAG (BALISE O/F, ORPHELINE) -->
+  <!-- Les différents types d'INPUT sont: -->
+  <!-- On a le type text, hidden, password, tel, datetime-local, numeric, checkbox, radio -->
+  <!-- Les textarea ( GRAND CHAMP ), les select (CREER UNE LISTE DEROULANTE) -->
+  <!-- NB: En JavaScript le sélecteur recommandé est l'ID -->
+  <!-- NB: EN CSS les sélecteurs recommandés sont ID/CLASS/ATTR/DATA-ATTR -->
+  <!-- Les éléments de type DIV sont des éléments de type BLOCK -->
+  <!-- Type BLOCK <=> width = 100% -->
+  <div id="content">
+    <!-- Un CONTENEUR -->
+    <div class="box">
+      <form id="form">
+        <label for="age" class="label">Age: </label>
+        <input type="text" id="age" autofocus autcomplete/>
+        <button type="button" class="btn" id="button">Valider</button>
+      </form>
+    </div>
+    <div class="result">
+      <p id="result">Resultat</p>
+    </div>
+  </div>
+  <!-- Toujours importer le script a la fin -->
+  <script type="text/javascript" src="./lib.js"></script>
+  <script type="text/javascript" src="./index.js"></script>
+</body>
+
+</html>
