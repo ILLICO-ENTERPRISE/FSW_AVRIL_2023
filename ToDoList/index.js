@@ -76,3 +76,6 @@ const makeTaskElement = (taskName, priority, status) => {
 
   return container
 }
+
+// Verification du STORAGE
+console.log(localStorage.getItem('tasks'))

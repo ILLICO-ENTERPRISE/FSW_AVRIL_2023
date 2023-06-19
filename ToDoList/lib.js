@@ -1,6 +1,113 @@
 // DOC: https://developer.mozilla.org/fr/docs/Web/JavaScript
 
+// Les données sont volatiles
+// Quand on réactualise les données sont mis a zéro
+// Utiliser le LOCAL STORAGE pour persister les données
 const tasks = [];
+
+
+// localStorage (5Mo) ??
+// sessionStorage (5Mo) ??
+// cookieStore (5Mo) ??
+// Object en JS => {key: value}
+
+
+// SINGLE RESPONSIBILITY
+// PATTERN SOLID
+// S => SINGLE RESPONSIBILITY
+// O => OPEN/CLOSE
+// I => DEPENDENCY INVERSION
+class TaskManager {
+  // CONSTRUCTEUR
+  // Etape d'initialisation => __init__ en PYTHON
+  // This => self en PYTHON
+  constructor(name, slug, priority, status) {
+    // Un ATTRIBUT de la classe
+    this.task = {
+      name: name,
+      slug: this.makeSlug(slug),
+      priority: priority,
+      status: status,
+    }
+  }
+
+  makeSlug() {
+    let splits = this.slug.split(' ');
+    return splits.join('-');
+  }
+
+  // OOP ( GETTER / SETTER )
+  // GETTER RETURN toujours une valeur
+  // SETTER modifie une valeur d'un attribut de ma classe
+  // Un GETTER retourne toujours une VALEUR
+  // NB: Une fonction d'une classe: METHODE
+  async getName() {
+    return this.task.name
+  }
+
+  async getSlug() {
+    return this.task.slug
+  }
+
+  async getPriority() {
+    return this.task.priority
+  }
+
+  async getStatus() {
+    return this.task.status
+  }
+
+  // SETTER de STATUS
+  async setStatus(status) {
+    this.task.status = status
+  }
+
+  // On est en cours
+  // STATUS => PENDING
+  async startTask() {
+    this.setStatus('PENDING')
+  }
+
+  // On est en cours
+  // STATUS => PENDING
+  async endTask() {
+    this.setStatus('COMPLETED')
+  }
+}
+
+
+// SINGLE RESPONSIBILITY
+// INJECTION DE DEPENDANCE
+class PersistData {
+  /**
+   * @task {TaskManager}
+  */
+  constructor(task) {
+    this.saveTask(task)
+  }
+
+  async saveTask(task) {
+    const db = localStorage.getItem('tasks')
+
+    if (!db) {
+      let datas = []
+      datas.push(task)
+      localStorage.setItem('tasks', datas);
+    } else {
+      let datas = localStorage.getItem('tasks')
+      datas.push(task)
+    }
+  }
+}
+
+class TaskQueryManager {
+  constructor() {
+    this.db = localStorage.getItem('tasks')
+  }
+
+  async findTask() {}
+}
+
 
 /**
  * [seeTasks]
