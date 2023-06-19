@@ -3,6 +3,7 @@ const button = document.querySelector('button')
 const task = document.querySelector('#task')
 const taskContainer = document.querySelector('#tasks-container')
 
+// Validation de l'existence de l'élément sur le DOM
 if (!task) {
   throw new Error('Task Element not found')
 }
@@ -12,7 +13,7 @@ if (!button) {
 }
 
 if (!taskContainer) {
-  throw new Error('TaskContainer Element not found')
+  throw new Error('Task Container Element not found')
 }
 
 // MODE ASYNCHRONE ( 1 )
@@ -20,19 +21,23 @@ if (!taskContainer) {
 const clickHandler = async (event) => {
   let item = task.value.toUpperCase()
   let slug = item.toLowerCase()
-  let priority = 1
+  let priority = document.querySelector('#priority').value
+
   await addTask(item, slug, priority)
 
   // Re afficher la liste des TACHES après Ajout
   seeTasks().then((res) => {
+    // Réinitialiser le container
+    // Ce n'est pas OPTIMAL
+    taskContainer.innerHTML = ''
+
     // Le forEach permettre d'itérerv sur le TABLEAU
     res.forEach((taskElement) => {
       // La DECONSTRUCTION: Utiliser le nom des clés
-      const {name, slug, priority} = taskElement;
+      const {name, slug, priority, status} = taskElement;
 
       // Ajouter l'élément sur le DOM dans task-container
-      taskContainer.appendChild(makeTaskElement(name, priority))
-
+      taskContainer.appendChild(makeTaskElement(name, priority, status))
     })
   }).catch((err) => {
     console.log(err);
@@ -53,16 +58,19 @@ seeTasks().then((res) => {
   console.log(err);
 })
 
-const makeTaskElement = (taskName, priority) => {
+const makeTaskElement = (taskName, priority, status) => {
   let container = document.createElement('div')
   let containerH3 = document.createElement('h3')
   let containerP = document.createElement('p')
+  let containerSpan = document.createElement('span')
 
   containerP.innerHTML = taskName
   containerH3.innerHTML = `Priority: ${priority}`
+  containerSpan.innerHTML = status
 
   container.appendChild(containerH3)
   container.appendChild(containerP)
+  container.appendChild(containerSpan)
 
   container.classList.add('task')
 

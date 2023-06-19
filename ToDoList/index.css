@@ -18,12 +18,22 @@ body {
   position: relative;
 }
 
-[type="text"] {
+[type="text"],
+[type="number"] {
   width: 100%;
   height: 30px;
   font-size: 20px;
   border: 1px solid black;
   padding: 5px;
+}
+
+[id="status"] {
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  border: 1px solid black;
+  padding: 5px;
+  display: block;
 }
 
 button {

@@ -27,10 +27,11 @@ const makeSlug = async (slug) => {
  * @param {Number} priority
  * @return Promise<*>
  */
-const addTask = async (task, slug, priority) => {
+const addTask = async (task, slug, priority, status) => {
   tasks.push({
     name: task,
     slug: await makeSlug(slug),
+    status: status,
     priority: priority,
   });
 }

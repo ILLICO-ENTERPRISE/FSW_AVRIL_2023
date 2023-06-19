@@ -16,8 +16,20 @@
   <div class="todo-box">
     <form class="todo-form">
       <div>
-        <label for="task"></label>
+        <label for="task">Nom Tache:</label>
         <input type="text" id="task">
+      </div><br>
+      <div>
+        <label for="priority">Priorité: </label>
+        <input type="number" id="priority" min="1" max="10">
+      </div><br>
+      <div>
+        <label for="status">Status: </label>
+        <select id="status">
+          <option value="CREATED" name="status" selected>CREATED</option>
+          <option value="PENDING" name="status">PENDING</option>
+          <option value="COMPLETED" name="status">COMPLETED</option>
+        </select>
       </div>
       <div>
         <button type="button">Valider</button>
