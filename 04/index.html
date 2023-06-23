@@ -1,0 +1,55 @@
+<!-- https://axios-http.com/fr/docs/intro -->
+<!-- https://jsonplaceholder.typicode.com/ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./index.css" />
+  <title>Ajax</title>
+</head>
+
+<body>
+  <div class="form-container">
+    <form novalidate>
+      <div>
+        <label for="title">Title</label>
+        <input type="text" name="title">
+      </div>
+      <div>
+        <label for="body">Body</label>
+        <input type="text" name="body">
+      </div>
+      <div>
+        <label for="userId">UserId</label>
+        <input type="text" name="userId">
+      </div>
+      <button id="submit">Valider</button>
+    </form>
+  </div><br>
+  <div class="container" id="container"></div>
+  <!-- On fait du CLIENT/SERVER avec du AJAX -->
+  <!-- Le client envoie des requêtes au serveur -->
+  <!-- Et le serveur répond au client -->
+  <!-- Les requêtes sont de types GET/POST/PUT/PATCH/DELETE/HEAD/OPTIONS -->
+  <!-- Ces requêtes sont appelées des actions -->
+  <!-- Des actions de type GET/POST/PUT/PATCH/DELETE -->
+  <!-- GET: on reçoit des données du serveur -->
+  <!-- POST: on transmet des données au serveur -->
+  <!-- PUT/PATCH: on fait une mise COMPLETE/PARTIELLE des ressources sur le serveur -->
+  <!-- DELETE: on fait la suppression d'une ressource sur le serveur -->
+  <!-- Pour communiquer avec un serveur on utilise AJAX -->
+  <!-- SERVER (REMOTE/DISTANT) et le client est en (LOCAL) -->
+  <!-- SERVER (Héberge des APPPLICATIONS/SERVICES) -->
+  <!-- On peut communiquer avec un serveur via API -->
+  <!-- On peut communiquer avec un serveur et recevoir des PORTION DE CODE HTML (SSR) -->
+  <!-- SSR: Server Side Rendering -->
+  <!-- Les outils JS pour faire du AJAX il y AJAX/FETCH/AXIOS -->
+  <!-- 1er cas: API -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="./lib.js"></script>
+  <script type="text/javascript" src="./index.js"></script>
+</body>
+
+</html>

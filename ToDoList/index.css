@@ -1,5 +1,12 @@
+*,
+html,
 body {
-  padding: 40px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
 }
 
 .todo-box,
@@ -50,4 +57,19 @@ button {
 .task {
   margin-bottom: 10px;
   border-bottom: 1px solid black;
+}
+
+/*RESPONSIVE APPROCHE*/
+@media (max-width: 810px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 811px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

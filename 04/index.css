@@ -1,0 +1,37 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+
+.box {
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.form-container {
+  border: 1px solid gray;
+  width: 300px;
+  height: auto;
+  padding: 20px;
+}
+
+.form-container > form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container > form > div > input {
+  height: 34px;
+  border: 1px solid gray;
+  border-radius: 0;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 0;
+}

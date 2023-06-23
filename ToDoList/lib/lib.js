@@ -12,6 +12,14 @@ const tasks = [];
 // Object en JS => {key: value}
 
 
+// Create the ENUM
+// It is just a Object
+const STATUS = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CREATED: 'CREATED',
+}
+
 // SINGLE RESPONSIBILITY
 // PATTERN SOLID
 // S => SINGLE RESPONSIBILITY
@@ -27,7 +35,7 @@ class TaskManager {
       name: name,
       slug: this.makeSlug(slug),
       priority: priority,
-      status: status,
+      status: status ?? STATUS.CREATED,
     }
   }
 
@@ -65,116 +73,95 @@ class TaskManager {
   // On est en cours
   // STATUS => PENDING
   async startTask() {
-    this.setStatus('PENDING')
+    this.setStatus(STATUS.PENDING)
   }
 
   // On est en cours
   // STATUS => PENDING
   async endTask() {
-    this.setStatus('COMPLETED')
+    this.setStatus(STATUS.COMPLETED)
   }
 }
 
-
-// SINGLE RESPONSIBILITY
-// INJECTION DE DEPENDANCE
-class PersistData {
-  /**
-   * @task {TaskManager}
-  */
-  constructor(task) {
-    this.saveTask(task)
-  }
-
-  async saveTask(task) {
-    const db = localStorage.getItem('tasks')
-
-    if (!db) {
-      let datas = []
-      datas.push(task)
-      localStorage.setItem('tasks', datas);
-    } else {
-      let datas = localStorage.getItem('tasks')
-      datas.push(task)
-    }
-  }
-}
 
 class TaskQueryManager {
   constructor() {
-    this.db = localStorage.getItem('tasks')
+    this.initdb().then((db) => {
+      this.db = db;
+    }).catch((error) => {
+      console.error(error);
+    })
   }
 
-  async findTask() {}
-}
+  /**
+   * [initdb]
+   * @param void
+   * @return {Promise<Array>}
+  */
+  async initdb() {
+    if (!localStorage.getItem('tasks')) {
+      let datas = []
+      localStorage.setItem('tasks', datas);
+    }
 
+    return localStorage.getItem('tasks');
+  }
 
-/**
- * [seeTasks]
- * @return Promise<Array>
- */
-const seeTasks = async () => {
-  return tasks;
-}
+  /**
+   * [findAll]
+   * @param void
+   * @return {Promise<Array>}
+  */
+  async findAll() {
+    return this.db;
+  }
 
-/**
- * [makeSlug]
- * @param {String} slug
- * @return Promise<*>
- */
-const makeSlug = async (slug) => {
-  let splits = slug.split(' ');
-  return splits.join('-');
-}
+  /**
+   * [findById]
+   * @param {Number} index
+   * @return {Promise<Task>}
+  */
+  async findById(index) {
+    return this.db.find((item, index) => index === index);
+  }
 
-/**
- * [addTask]
- * @param {String} task
- * @param {String} slug
- * @param {Number} priority
- * @return Promise<*>
- */
-const addTask = async (task, slug, priority, status) => {
-  tasks.push({
-    name: task,
-    slug: await makeSlug(slug),
-    status: status,
-    priority: priority,
-  });
-}
+  /**
+   * [findBySlug]
+   * @param {String} slug
+   * @return {Promise<Task>}
+  */
+  async findBySlug(slug) {
+    return this.db.find(item => item.slug === slug);
+  }
 
-/**
- * [findTask]
- * @param {String} slug
- * @return Promise<*>
- */
-const findTask = async (slug) => {
-  return tasks.find(item => item.slug === slug);
-}
+  /**
+   * [findByStatus]
+   * @param {String} status
+   * @return {Promise<Task[]>}
+  */
+  async findByStatus(status) {
+    return this.db.filter(item => item.status === status);
+  }
 
-/**
- * [findTask]
- * @param {String} slug
- * @return Promise<Boolean>
- */
-const removeTask = async (slug) => {
-  let element = findTask(slug);
+  /**
+   * [saveTask]
+   * @param {Task} task
+   * @return {Promise}
+  */
+  async saveTask(task) {
+    this.db.push(task);
+  }
 
-  if (!element) return false;
-
-  let index = tasks.indexOf(element);
-  tasks.remove(element);
-  return true;
-}
-
-/**
- * [sortByPriority]
- * Tri Par Insertion (ALGO)
- * https://fr.wikipedia.org/wiki/Tri_par_insertion
- * @return Promise<Array>
- */
-const sortByPriority = async (key) => {
-  return sortByKey(tasks, key);
+  /**
+   * [updateTask]
+   * @param {Task} task
+   * @param {Task} data
+   * @return Promise<Array>
+  */
+  async updateTask(slug, data) {
+    task = await this.db.findBySlug(slug);
+    task = { ...data };
+  }
 }
 
 /**

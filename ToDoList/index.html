@@ -4,48 +4,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./index.css">
-  <title>ToDo List</title>
+  <title>Ma Liste De Tâche</title>
 </head>
 
 <body>
-  <!-- 1. Donner la possibilité de renseigner les tâches -->
-  <!-- 2. Quand on clique rajouter la tache dans un TABLEAU -->
-  <!-- 3. Déclenche en CLICK EVENT -->
-  <h2>Ma ToDo Liste</h2>
-  <div class="todo-box">
-    <form class="todo-form">
-      <div>
-        <label for="task">Nom Tache:</label>
-        <input type="text" id="task">
-      </div><br>
-      <div>
-        <label for="priority">Priorité: </label>
-        <input type="number" id="priority" min="1" max="10">
-      </div><br>
-      <div>
-        <label for="status">Status: </label>
-        <select id="status">
-          <option value="CREATED" name="status" selected>CREATED</option>
-          <option value="PENDING" name="status">PENDING</option>
-          <option value="COMPLETED" name="status">COMPLETED</option>
-        </select>
+  <!-- Grid Container -->
+  <div class="container">
+    <div class="grid">
+      <div class="box">
+        <h2>Ajouter une tâche</h2>
+        <div class="todo-box">
+          <form class="todo-form">
+            <div>
+              <label for="task">Nom Tache:</label>
+              <input type="text" id="task">
+            </div><br>
+            <div>
+              <label for="priority">Priorité: </label>
+              <input type="number" id="priority" min="1" max="10">
+            </div><br>
+            <div>
+              <button type="button">Valider</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div>
-        <button type="button">Valider</button>
+      <div class="box">
+        <h2>Liste des tâches</h2>
+        <div class="todo-box" id="created-task-list">
+        </div>
       </div>
-    </form>
+      <div class="box">
+        <h2>Tâche en cours</h2>
+        <div class="todo-box" id="pending-task-list">
+        </div>
+      </div>
+    </div>
   </div>
-
-  <!-- Box qui va contenir les taches ajoutées -->
-  <!-- Cette partie est la partie VARIABLE -->
-  <!-- Ainsi quand on clique le bouton on rajoute DIV.TASK -->
-  <div class="todo-tasks" id="tasks-container">
-  </div>
-
   <!-- Importation des scripts js -->
-  <script src="./lib.js"></script>
-  <script src="./index.js"></script>
+  <script src="./index.js" type="module"></script>
 </body>
 
 </html>
